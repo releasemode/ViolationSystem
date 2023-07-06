@@ -1,0 +1,24 @@
+<app-header></app-header>
+<div class="body">
+<div class="container" id="container">
+    
+      <div class="form-container sign-in-container">
+        <form>
+            
+          <button type="button" (click)="login()" >login</button>
+          <br>
+          <!-- <button type="button" (click)="logout()">logout</button> -->
+          <div *ngIf="NotAuthorized" class="text-danger"> The user is not authorized to login</div>
+        </form>
+      </div>
+      <div class="overlay-container">
+        <div class="overlay">
+          <div class="overlay-panel overlay-right">
+            <h1>Violation system</h1>
+            <p></p>
+          </div>
+        </div>
+      </div>
+</div>
+</div>
+

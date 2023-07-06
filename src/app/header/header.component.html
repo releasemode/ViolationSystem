@@ -1,0 +1,16 @@
+<div class="header">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-auto">
+          <img src="../../assets/img/MWAN logo-01.png" alt="شعار موان" >
+        
+        </div>
+        <div class="text"  *ngIf="loginDisplay"> welcome {{employeeName}}
+          <button class="btn btn-primary" (click)="logout()">
+            Logout 
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+ 

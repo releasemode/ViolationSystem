@@ -1,0 +1,115 @@
+.btn-default {
+    background-color: #7CBA58;
+    border: 1px solid #7CBA58;
+     margin-left: 30px;
+     color: #fff;
+
+  }
+
+  .btn-default:hover {
+    background-color: #009d4f;
+    border: 1px solid #009d4f;
+  }
+
+  .btn-primary {
+    background-color: #7CBA58;
+    border: 1px solid #7CBA58;
+    margin: 10px;
+    color: #fff;
+  }
+
+  .btn-secondary{
+    background-color: #7CBA58;
+    border: 1px solid #7CBA58;
+    margin: 10px;
+    color: #fff;
+
+  }
+
+  .panel-default {
+    border: 1px solid #7CBA58;
+  }
+
+  #form-container {
+    width: 100%;
+    text-align: center;
+  }
+
+  .form-group {
+    margin-bottom: 15px;
+    display: inline-block;
+    width: 48%;
+    vertical-align: top;
+  }
+
+  .form-group label {
+    display: inline-block;
+    width: 30%;
+    text-align: right;
+    padding-right: 15px;
+  }
+
+  .form-group input[type="text"],
+  .form-group input[type="number"],
+  .form-group input[type="datetime-local"],
+  .form-group input[type="file"],
+  .form-group select,
+  .form-group textarea {
+    display: inline-block;
+    width: 65%;
+    height: 30px;
+    font-size: 14px;
+    padding: 5px;
+  }
+  .form-group input[type="file"]{
+    display: inline-block;
+    width: 65%;
+    height: 30px;
+    font-size: 14px;
+    padding: 5px;
+  
+  }
+  .form-group:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+
+  .header {
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  }
+
+  .header img {
+    height: 70px;
+    margin-left: 890px;
+  }
+
+  .button {
+    padding: 0;
+    margin-left: 0px;
+    font-size: 8px;
+    border: 0px solid #009d4f;
+    background-color: white;
+    color: Black;
+    border-radius: 0px;
+
+    }
+
+  .button-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+  }
+
+  .form-container {
+    margin-bottom: 10px;
+    text-align: center;
+  }
+
+  .error{
+    border: 1px solid red;
+  }
+
+  

@@ -1,0 +1,63 @@
+<app-header></app-header>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <div class="header">
+        <!-- <div class="container">
+          <div class="row align-items-center">
+            <div class="col-auto">
+              <img src="MWAN logo-01.png" alt="شعار موان" >
+            </div>
+          </div>
+        </div> -->
+      </div>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-6 col-md-offset-3">
+				<h2 class="text-center">Violation Details</h2>
+                <br>
+				<div class="alert alert-info alert-message text-center">{{violationLastStatus}}</div>
+				<table class="table">
+					<tbody>
+						<tr>
+							<td>ID Number:</td>
+							<td id="idNumber">{{violation.IdNumber}}</td>
+						</tr>
+						<tr>
+							<td>CR Number:</td>
+							<td id="crNumber">{{violation.CRNumber}}</td>
+						</tr>
+						<tr>
+							<td>Customer Name:</td>
+							<td id="customerName">{{violation.CustomerName}}</td>
+						</tr>
+						<tr>
+							<td>Violation Type:</td>
+							<td id="violationType">{{violation.ViolationType}}</td>
+						</tr>
+						<tr>
+							<td>Violation Amount:</td>
+							<td id="violationAmount">{{violation.ViolationAmount}}</td>
+						</tr>
+				        <tr>
+							<td>Report File:</td>
+							<td><a href="" (click)="downloadFile($event)">{{violation.ReportFilePath}}</a></td>
+						</tr>
+					</tbody>
+				</table>
+			
+				<div class="text-center" *ngIf="violation.LastStatus == 1 && isApprovalAuthority">
+                    
+					<button class="btn btn-success button" (click)="approve(violation.id)">Approve</button>
+					
+				
+					
+					<div class="form-group">
+						<label for="notes">Notes</label>
+						<input type="text" class="form-control" [(ngModel)]="notes" id="notes" placeholder="Enter notes" required="">
+						<small class="error" *ngIf="notesEmptyDiv">Notes required</small>
+					</div>
+					<button class="btn btn-danger button" (click)="reject(violation.id)">Reject</button>
+					<button class="btn btn-warning button"  (click)="cancel(violation.id)">Cancel</button>
+				</div>
+			</div>
+		</div>
+	</div>

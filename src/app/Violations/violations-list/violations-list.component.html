@@ -1,0 +1,77 @@
+<app-header></app-header>
+<div class="card">
+  <div class="card-header">
+   <h3 class="text-center">Violation List</h3>
+    <button   class="new-button" (click)="CreateViolation()">New</button>
+  </div>
+</div>
+  <br>
+ <div class="container d-flex justify-content-center">
+  <div class="row">
+  <div class="card" style="width: 25rem;" *ngFor="let violation of violationsList">
+    <div class="card-header">
+      <h3 class="text-center">{{getViolationStatus(violation.LastStatus) }} </h3>
+      
+     </div>
+    <div class="card-body">
+      <h5 class="card-title">{{violation.CustomerName}}</h5>
+      <p class="card-text">{{violation.ViolationType}}</p>
+      
+      <button class="btn btn-success" (click)="ShowSingleViolation(violation.id)"> View </button>
+      <button  class="btn btn-warning button" (click)="Edit(violation.id)" *ngIf="violation.LastStatus === 4"> Edit <img src="../../../assets/img/edit.svg" width="20" height="15"></button>
+    </div>
+  </div>
+  </div>
+</div>
+  <!-- <div class="container d-flex justify-content-center align-items-center">
+    <div class="card">
+      <div class="card-header">
+       <h3 class="text-center">Violation List</h3>
+        <button   class="new-button" (click)="CreateViolation()">New</button>
+      </div>
+
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>ID Number</th>
+                <th>CR Number</th>
+                <th>Customer Name</th>
+                <th>Violation Type</th>
+                <th>Violation Amount</th>
+                <th>Violation Status</th>
+                <th>Action</th>
+
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let violation of violationsList">
+                <td id="idNumber">{{violation.IdNumber}}</td>
+                <td id="crNumber">{{violation.CRNumber}}</td>
+                <td id="customerName">{{violation.CustomerName}}</td>
+                <td id="violationType">{{violation.ViolationType}}</td>
+                <td id="violationAmount">{{violation.ViolationAmount}}</td>
+                <td id="violationAmount">{{getViolationStatus(violation.LastStatus)}}</td>
+                <td>
+                  <button class="button" (click)="ShowSingleViolation(violation.id)">
+                    View <img src="../../../assets/img/view.svg" width="20" height="15">
+                  </button>
+                  <span>
+                  <button class="button" (click)="Edit(violation.id)" *ngIf="violation.LastStatus === 4">  
+                    Edit <img src="../../../assets/img/edit.svg" width="20" height="15">
+                  </button>  </span>
+                
+                </td>
+
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+           
+        
+      </div>
+    </div>
+  </div>
+  -->

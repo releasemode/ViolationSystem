@@ -1,0 +1,238 @@
+<app-header></app-header>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <div class="container">
+      <div class="panel panel-default">
+        <div class="panel-heading text-center"><h3 > {{formName}} violation</h3></div>
+        <br>
+        <div class="panel-body">
+          <div id="form-container">
+            <div class="button-container">
+           
+</div>
+
+            <form id="violation-report-form"  [formGroup]="violationForm" (ngSubmit)="onSubmit()">
+              <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+                <input type="radio" formControlName="ViolatorType"  class="btn-check"  id="btnradio1"
+                     [value]=1 #vInSelect autocomplete="off" (change)="onViolatorTypeSelected(vInSelect);" >
+                <label class="btn btn-outline-primary" for="btnradio1">Individual</label>
+              
+                <input type="radio" class="btn-check" formControlName="ViolatorType"
+                       [value]=2 id="btnradio2" #vCRSelect  autocomplete="off" (change)="onViolatorTypeSelected(vCRSelect);">
+                <label class="btn btn-outline-primary" for="btnradio2" >Business</label>
+              
+              </div><br>
+              <br>
+              <div class="form-group" *ngIf="isIDShown"> 
+                <label for="IdNumber">Id Number:</label>
+                <input type="number" class="form-control" formControlName="IdNumber" id="IdNumber"  placeholder="Enter IDNumber" [ngClass]="{error: getControl('IdNumber')?.errors && validationFormSubmitted}">
+                <div *ngIf="getControl('IdNumber')?.errors && validationFormSubmitted">
+                  <small class="text-danger">
+                      Id Number must be 10 digits
+                  </small>
+                </div>
+              </div>
+          
+              <div class="form-group" *ngIf="isCRShown"> 
+                <label for="CRNumber">CR Number:</label>
+                <!-- <input type="text" class="form-control" id="customer-CR" required> -->
+                <input type="number" class="form-control" formControlName="CRNumber" id="CRNumber" placeholder="Enter CR Number" [ngClass]="{error: getControl('CRNumber')?.errors && validationFormSubmitted}">
+                <div *ngIf="getControl('CRNumber')?.errors && validationFormSubmitted">
+                  <small class="text-danger">
+                      CR Number must be 10 digits
+                  </small>
+                </div>
+              </div>
+          
+              <div class="form-group">
+                <label for="customerName">Customer Name:</label>
+                <input type="text" class="form-control" formControlName="CustomerName" id="customerName" placeholder="Enter Customer Name" [ngClass]="{error: getControl('CustomerName')?.errors && validationFormSubmitted}">
+                <div *ngIf="getControl('CustomerName')?.errors && validationFormSubmitted">
+                  <small class="text-danger">
+                      Customer name is required
+                  </small>
+                </div>
+              </div>
+          
+        
+
+               <div class="form-group">
+                <label for="ViolationCity">Violation City:</label>
+                <select
+                class="custom-select mb-3"
+                  
+                formControlName="CityId"
+                [ngClass]="{error: getControl('CityId')?.errors && validationFormSubmitted}"
+              >
+                <option value="">Choose Violation City</option>
+                <option *ngFor="let city of Cities"  [ngValue]="city['id']" > 
+                  {{ city['CityName'] }}
+                </option>
+              </select>
+              </div> 
+         
+           <div class="form-group">
+                <label for="ViolationLocation">Violation Location:</label>
+                <input type="text" class="form-control" formControlName="ViolationLocation" (click)="showMap()" id="ViolationLocation" placeholder="Enter Violation Location" [ngClass]="{error: getControl('ViolationLocation')?.errors && validationFormSubmitted}">
+                <div *ngIf="getControl('ViolationLocation')?.errors && validationFormSubmitted">
+                  <small class="text-danger">
+                    Violation Location is required
+                  </small>
+                </div>
+                <button *ngIf="isMapVisible"  (click)="closeMap($event)">Close Map</button>
+                <google-map *ngIf="isMapVisible" 
+                            [center]="center" 
+                            (mapClick)="mapClicked($event)"
+                ></google-map>
+              </div> 
+
+              
+          
+               <div class="form-group">
+                <!-- <div *ngIf="formName=='Edit '">
+                  <small class="text">
+                   selected Violation Severity {{EditViolation.ViolationSeverityId['ViolationCategory']}}
+                  </small>
+                </div> -->
+                <label for="customer-Severity">Violation Severity Id:</label> 
+                <select
+                class="custom-select mb-3"
+                #rangeSelect
+                (change)="onRangeSelected(rangeSelect.value)"
+                formControlName="ViolationSeverityId"
+                [ngClass]="{error: getControl('ViolationSeverityId')?.errors && validationFormSubmitted}"
+              >
+                <option value="">Choose Violation Range</option>
+                <option *ngFor="let range of violationRanges"  [ngValue]="range['ViolationCategoryId']" > 
+                  {{ range['ViolationCategory'] }}
+                </option>
+              </select>
+              <div *ngIf="getControl('ViolationSeverityId')?.errors && validationFormSubmitted">
+                <small class="text-danger">
+                  Violation Severity is required
+                </small>
+              </div>
+              </div>   
+          
+        
+               <div class="form-group">
+                <!-- <div *ngIf="formName=='Edit '">
+                  <small class="text">
+                    selected Violation Type {{EditViolation.ViolationType["ViolationName"]}} 
+                    
+                  </small>
+                </div> -->
+                <label for="customer-Type">Violation Type:</label> 
+                <select
+        class="custom-select mb-3"
+        #typeSelect
+        (change)="onViolationTypeSelected(typeSelect.value)"
+        formControlName="ViolationType"
+        [ngClass]="{error: getControl('ViolationType')?.errors && validationFormSubmitted}"
+      >
+        <option value="">Choose Violation Type</option>
+        <option *ngFor="let type of ViolationTypes" [ngValue]="type['id']" >
+          {{ type['ViolationName'] }}
+        </option>
+      </select>
+      <div *ngIf="getControl('ViolationType')?.errors && validationFormSubmitted">
+        <small class="text-danger">
+          Violation Type is required
+        </small>
+      </div>
+      <div *ngIf="selectedProceduralPenalty!=''" class="alert alert-info alert-message">
+       
+         {{selectedProceduralPenalty}}
+       
+      </div> 
+      
+              </div>
+          
+                <div class="form-group">
+                <label for="customer-Amount">Violation Amount:</label>
+                <input type="number" class="form-control"  #amountSelect formControlName="ViolationAmount" id="ViolationAmount" (input)="isAmountInRange($event)" placeholder="Enter Violation Amount" [ngClass]="{error: getControl('ViolationAmount')?.errors && validationFormSubmitted}">
+                <div>
+                  <small class="text-danger" *ngIf="!isViolationAmountInRange">
+                      Violation amount not in range
+                  </small>
+                </div>
+              </div>
+          
+              <div class="form-group">
+                <label for="violation-description">Violation Description:</label>
+                <textarea type="text" class="form-control" formControlName="ViolationDescription" id="ViolationDescription" placeholder="Enter Violation Description" [ngClass]="{error: getControl('ViolationDescription')?.errors && validationFormSubmitted}"></textarea>
+                <div *ngIf="getControl('ViolationDescription')?.errors && validationFormSubmitted">
+                  <small class="text-danger">
+                    Violation Description is required
+                  </small>
+                </div>
+              </div>
+          
+              <div class="form-group">
+                <label for="customer-Report">Report Number:</label>
+                <input type="text" class="form-control" formControlName="ReportNumber" id="ReportNumber" placeholder="Enter Report Number" [ngClass]="{error: getControl('ReportNumber')?.errors && validationFormSubmitted}">
+                <div *ngIf="getControl('ReportNumber')?.errors && validationFormSubmitted">
+                  <small class="text-danger">
+                    Report Number is required
+                  </small>
+                </div>
+              </div>
+          
+              <div class="form-group">
+                <label for="report-date">Report Date:</label>
+                <input type="datetime-local" class="form-control" formControlName="ReportDate" id="ReportDate" placeholder="Select Report Date" [ngClass]="{error: getControl('ReportDate')?.errors && validationFormSubmitted}">
+                <div *ngIf="getControl('ReportDate')?.errors && validationFormSubmitted">
+                  <small class="text-danger">
+                    Report Date is required
+                  </small>
+                </div>
+              </div>
+             
+          
+              <div class="form-group">
+                <div *ngIf="formName=='Edit '">
+                  <small class="info">
+                   uploaded File {{EditViolation.ReportFilePath}} 
+                   <button class="button" (click)="downloadFile($event)">  
+                     <img src="../../../assets/img/downloadicon.svg" width="80" height="80">
+                  </button> 
+                  </small>
+                </div>
+                <label for="customer-File">Report File Path:</label>
+                <input type="file" class="form-control" formControlName="ReportFilePath" id="ReportFilePath" placeholder="Select Report File" (change)="onFileSelect($event)">
+              </div>
+              <div class="form-group">
+                <label for="report-date">Inspector Names:</label>
+              <input type="text"
+              cols="40" 
+              rows="5" 
+           
+              name="Text1" 
+              formControlName="InspectorNames" id="InspectorNames" placeholder="Enter InspectorNames"
+              value=""  [ngClass]="{error: getControl('InspectorNames')?.errors && validationFormSubmitted}"/>
+              <div *ngIf="getControl('InspectorNames')?.errors && validationFormSubmitted">
+                <small class="text-danger">
+                  Inspector Names is required
+                </small>
+              </div>
+              </div>
+              <div class="form-group">
+                <label for="report-date">Notes</label>
+              <input type="text"
+              cols="40" 
+              rows="5" 
+           
+              name="Text1" 
+              formControlName="Notes" id="Notes" placeholder="Enter Notes"
+              value="" [ngClass]="{error: getControl('Notes')?.errors && validationFormSubmitted}" />
+              <div *ngIf="getControl('Notes')?.errors && validationFormSubmitted">
+                <small class="text-danger">
+                  Notes is required
+                </small>
+              </div>
+              </div>
+    <!-- Button -->
+    <div class="text-center">
+      <button type="submit" class="btn btn-secondary">Submit</button>  
+       <!-- [disabled]="!violationForm.valid" -->
+    </div>
+  </form>
