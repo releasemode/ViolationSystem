@@ -60,7 +60,7 @@ export class ViolationApiService {
   async GetViolations(){
     let {data,error} = await this.supabase
             .from('Violations')
-            .select('*,ViolationTypes(*)')
+            .select('*,ViolationTypes(*),ViolationSeverity(*)')
             .order('id', { ascending: false })
     
     

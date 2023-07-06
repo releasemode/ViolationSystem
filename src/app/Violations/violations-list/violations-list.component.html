@@ -10,12 +10,14 @@
   <div class="row">
   <div class="card" style="width: 25rem;" *ngFor="let violation of violationsList">
     <div class="card-header">
-      <h3 class="text-center">{{getViolationStatus(violation.LastStatus) }} </h3>
+      <h3 class="text-center"[ngStyle]="violation.LastStatus==4 && {'background-color': 'yellow'} || violation.LastStatus==3 && {'background-color': 'red'} || violation.LastStatus==2 && {'background-color': 'green'}">{{getViolationStatus(violation.LastStatus) }} </h3>
       
      </div>
     <div class="card-body">
-      <h5 class="card-title">{{violation.CustomerName}}</h5>
-      <p class="card-text">{{violation.ViolationType}}</p>
+      <h3 class="card-title">Violation ID: {{violation.id}}</h3>
+      <h5 class="card-text"> Customer Name: {{violation.CustomerName}}</h5>
+      <p class="card-text"> Violation Range: {{violation.ViolationSeverityId}}</p>
+      <p class="card-text">Violation Type: {{violation.ViolationType}}</p>
       
       <button class="btn btn-success" (click)="ShowSingleViolation(violation.id)"> View </button>
       <button  class="btn btn-warning button" (click)="Edit(violation.id)" *ngIf="violation.LastStatus === 4"> Edit <img src="../../../assets/img/edit.svg" width="20" height="15"></button>

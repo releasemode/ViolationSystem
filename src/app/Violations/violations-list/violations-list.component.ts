@@ -21,11 +21,12 @@ export class ViolationsListComponent {
       //console.log('ViolationList with foriegn key',data);
       data.map(item=>{
         let violationItem=new Violation();
-      //  console.log('violation item',item)
+        console.log('violation item',item)
         violationItem.id = item['id'];
         violationItem.CRNumber = item['CRNumber'];
         violationItem.IdNumber = item['IdNumber'];
         violationItem.CustomerName= item['CustomerName'];
+        violationItem.ViolationSeverityId = item['ViolationSeverity']['ViolationCategory']
         violationItem.ViolationType = item['ViolationTypes']['ViolationName']
         violationItem.ViolationAmount = item['ViolationAmount']
         violationItem.LastStatus = item['LastStatus']
