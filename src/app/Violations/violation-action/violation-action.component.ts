@@ -43,10 +43,13 @@ export class ViolationActionComponent {
         this.violation.IdNumber=  item['IdNumber'];
         this.violation.CRNumber=item['CRNumber'];
         this.violation.CustomerName= item['CustomerName'];
+        this.violation.ViolationSeverityId = item['ViolationSeverity']['ViolationCategory']
         this.violation.ViolationType = item['ViolationTypes']['ViolationName']
         this.violation.ViolationAmount = item['ViolationAmount'];
         this.violation.LastStatus = item['LastStatus'];
         this.violation.ReportFilePath = item['ReportFilePath']
+        this.violation.CancelNotes = item['CancelNotes']
+        this.violation.RejectionNotes = item['RejectionNotes']
         this.violationLastStatus = Object.values(ViolationStatus)[this.violation.LastStatus-1].toString();
       })
       })

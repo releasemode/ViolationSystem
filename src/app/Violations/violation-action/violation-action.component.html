@@ -29,6 +29,11 @@
 							<td>Customer Name:</td>
 							<td id="customerName">{{violation.CustomerName}}</td>
 						</tr>
+						
+						<tr>
+							<td>Violation Severity:</td>
+							<td id="violationAmount">{{violation.ViolationSeverityId}}</td>
+						</tr>
 						<tr>
 							<td>Violation Type:</td>
 							<td id="violationType">{{violation.ViolationType}}</td>
@@ -37,9 +42,18 @@
 							<td>Violation Amount:</td>
 							<td id="violationAmount">{{violation.ViolationAmount}}</td>
 						</tr>
+
 				        <tr>
 							<td>Report File:</td>
 							<td><a href="" (click)="downloadFile($event)">{{violation.ReportFilePath}}</a></td>
+						</tr>
+						<tr>
+							<td>Cancelled Reason</td>
+							<td *ngIf="violation.LastStatus==4" id="violationAmount">{{violation.CancelNotes}}</td>
+						</tr>
+						<tr>
+							<td>Rejection Reason</td>
+							<td id="violationAmount">{{violation.RejectionNotes}}</td>
 						</tr>
 					</tbody>
 				</table>

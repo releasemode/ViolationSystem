@@ -24,4 +24,6 @@ export class Violation{
     LastStatus: number;
     LastStatusDate: Date;
     CreatedAt: Date;
+    CancelNotes:string;
+    RejectionNotes:string;
 }
