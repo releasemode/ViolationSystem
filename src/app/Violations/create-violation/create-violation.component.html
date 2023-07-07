@@ -72,7 +72,7 @@
          
            <div class="form-group">
                 <label for="ViolationLocation">Violation Location:</label>
-                <input type="text" class="form-control" formControlName="ViolationLocation" (click)="showMap()" id="ViolationLocation" placeholder="Enter Violation Location" [ngClass]="{error: getControl('ViolationLocation')?.errors && validationFormSubmitted}">
+                <input type="text" class="form-control" formControlName="ViolationLocation" (focus)="showMap()" id="ViolationLocation" placeholder="Enter Violation Location" [ngClass]="{error: getControl('ViolationLocation')?.errors && validationFormSubmitted}">
                 <div *ngIf="getControl('ViolationLocation')?.errors && validationFormSubmitted">
                   <small class="text-danger">
                     Violation Location is required
@@ -199,6 +199,11 @@
                 </div>
                 <label for="customer-File">Report File Path:</label>
                 <input type="file" class="form-control" formControlName="ReportFilePath" id="ReportFilePath" placeholder="Select Report File" (change)="onFileSelect($event)">
+                <div *ngIf="getControl('ReportFilePath')?.errors && validationFormSubmitted">
+                  <small class="text-danger">
+                    Report Date is required
+                  </small>
+                </div>
               </div>
               <div class="form-group">
                 <label for="report-date">Inspector Names:</label>

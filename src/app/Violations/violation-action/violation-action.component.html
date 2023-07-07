@@ -17,13 +17,19 @@
 				<div class="alert alert-info alert-message text-center">{{violationLastStatus}}</div>
 				<table class="table">
 					<tbody>
+						
 						<tr>
 							<td>ID Number:</td>
 							<td id="idNumber">{{violation.IdNumber}}</td>
 						</tr>
+						
 						<tr>
 							<td>CR Number:</td>
 							<td id="crNumber">{{violation.CRNumber}}</td>
+						</tr>
+						<tr>
+							<td>Created On</td>
+							<td>{{violation.CreatedAt}}</td>
 						</tr>
 						<tr>
 							<td>Customer Name:</td>
@@ -39,19 +45,27 @@
 							<td id="violationType">{{violation.ViolationType}}</td>
 						</tr>
 						<tr>
+							<td>Violation Description</td>
+							<td>{{violation.ViolationDescription}}</td>
+						</tr>
+						<tr>
 							<td>Violation Amount:</td>
 							<td id="violationAmount">{{violation.ViolationAmount}}</td>
 						</tr>
-
+						<tr>
+							<td>Notes</td>
+							<td>{{violation.Notes}}</td>
+						</tr>
 				        <tr>
 							<td>Report File:</td>
 							<td><a href="" (click)="downloadFile($event)">{{violation.ReportFilePath}}</a></td>
 						</tr>
-						<tr>
+						
+						<tr *ngIf="violation.LastStatus==4">
 							<td>Cancelled Reason</td>
-							<td *ngIf="violation.LastStatus==4" id="violationAmount">{{violation.CancelNotes}}</td>
+							<td  id="violationAmount">{{violation.CancelNotes}}</td>
 						</tr>
-						<tr>
+						<tr *ngIf="violation.LastStatus==3">
 							<td>Rejection Reason</td>
 							<td id="violationAmount">{{violation.RejectionNotes}}</td>
 						</tr>

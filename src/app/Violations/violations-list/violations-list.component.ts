@@ -31,6 +31,8 @@ export class ViolationsListComponent {
         violationItem.ViolationAmount = item['ViolationAmount']
         violationItem.LastStatus = item['LastStatus']
         violationItem.CreatedAt = item['created_at']
+        violationItem.CancelNotes =item['CancelNotes']
+        violationItem.RejectionNotes= item['RejectionNotes']
         this.violationsList.push(violationItem)
       });
      
@@ -43,6 +45,14 @@ export class ViolationsListComponent {
   getViolationStatus(statusId:number){
     return Object.values(ViolationStatus)[statusId-1].toString()
   }
+  StatusBadge(statusId:number){
+    if(statusId== 1) return "badge bg-secondary"
+    else if(statusId ==2) return "badge bg-success"
+    else if(statusId ==3) return "badge bg-danger"
+    else if(statusId ==4) return "badge bg-dark"
+    return "badge bg-primary"
+  }
+  
   ShowSingleViolation(violationId:number){
     
     let url: string = "/ViolationList/" + violationId;

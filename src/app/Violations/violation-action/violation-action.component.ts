@@ -48,7 +48,10 @@ export class ViolationActionComponent {
         this.violation.ViolationAmount = item['ViolationAmount'];
         this.violation.LastStatus = item['LastStatus'];
         this.violation.ReportFilePath = item['ReportFilePath']
+        this.violation.Notes = item['Notes']
         this.violation.CancelNotes = item['CancelNotes']
+        this.violation.ViolationDescription = item['ViolationDescription']
+        this.violation.CreatedAt = item["created_at"]
         this.violation.RejectionNotes = item['RejectionNotes']
         this.violationLastStatus = Object.values(ViolationStatus)[this.violation.LastStatus-1].toString();
       })
